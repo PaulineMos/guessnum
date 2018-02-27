@@ -1,13 +1,16 @@
 package javacourses;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
+
         String answer;
 
         do {
@@ -16,10 +19,10 @@ public class Main {
             int myNum = random.nextInt(100) + 1;
             int userNum = 0;
 
-            System.out.println(myNum);
+            System.out.println("Spoiler" + myNum);
             for (int i = 0; i < 10; i++) {
                 System.out.println("My try is " + (i + 1));
-                userNum = scanner.nextInt();
+                userNum = askNumber();
 
                 System.out.println(userNum);
 
@@ -39,9 +42,45 @@ public class Main {
                 System.out.println("You lost!");
                 System.out.println("Do you want to try again?");
             }
-            answer = scanner.next();
+            answer = askAnswer();
 
-        } while (answer.equals("Yes"));
+        } while (answer.equalsIgnoreCase("Yes"));
+
         System.out.println("Ok! See You next time!");
+
     }
+   static  int askNumber(){
+        for (;;) {
+            try {
+                int num = scanner.nextInt();
+                if (num <= 100 && num >= 1) {
+                    return num;
+                }
+            } catch (InputMismatchException e){
+                scanner.next();
+                System.out.println("oops!");
+            }
+            System.out.print("Oh, no! Wrong number. Try again: ");
+        }
+
+   }
+   static String askAnswer(){
+        for (;;) {
+            String answer = scanner.next();
+            if (answer.equalsIgnoreCase("Yes") || answer.equalsIgnoreCase("No")){
+                return answer;
+            }
+            System.out.println("Sorry, write Yes or No!");
+        }
+   }
+// static  int askNumber(){
+//        int num;
+//        do {
+//             num = scanner.nextInt();
+//            if (num > 100 || num < 1) {
+//                System.out.print("Oh, no! Wrong number. Try again:");
+//            }
+//        } while (num > 100 || num < 1);
+//        return num;
+//   }
 }

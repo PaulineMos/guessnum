@@ -1,6 +1,5 @@
 package javacourses;
 
-import com.sun.prism.shader.Solid_Color_AlphaTest_Loader;
 
 import java.util.*;
 
@@ -10,8 +9,8 @@ public class Main {
     static Random random = new Random();
 
     public static void main(String[] args) {
-        long t = System.currentTimeMillis();
-        System.out.println("Current time is " + t);
+
+       // System.out.println("Current time is " + t);
         ArrayList<GameResult> leaderboard = new ArrayList<>();
         try {
             String answer;
@@ -30,7 +29,7 @@ public class Main {
             System.out.println("Oh! It's pity! You decided to cancel the game!");
             }
             for (GameResult r : leaderboard){
-                System.out.println(r.userName + "\t" + r.attempts);
+                System.out.println(r.userName + "\t" + r.attempts + "\t" + r.time);
             }
         System.out.println("Ok! See You next time!");
     }
@@ -38,6 +37,9 @@ public class Main {
     private static GameResult doGame(String userName) {
         System.out.println("Hello, " + userName);
         System.out.println("I think of number from 1 to 100. Try to guess it.");
+
+        long t1 = System.currentTimeMillis();
+        System.out.println("Current time is " + t1);
 
         int myNum = random.nextInt(100) + 1;
         int userNum = 0;
@@ -59,10 +61,16 @@ public class Main {
                 System.out.println("My number is less");
             } else {
                 System.out.println("Bingo!");
+                long t2 = System.currentTimeMillis();
+                System.out.println("Time is " + t2);
+                long time = t2 - t1;
+                result.time = time;
                 result.attempts = i;
                 return result;
             }
         }
+
+
         if (myNum != userNum) {
             System.out.println("You lost!");
         }

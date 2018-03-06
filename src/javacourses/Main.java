@@ -39,7 +39,6 @@ public class Main {
         System.out.println("I think of number from 1 to 100. Try to guess it.");
 
         long t1 = System.currentTimeMillis();
-        System.out.println("Current time is " + t1);
 
         int myNum = random.nextInt(100) + 1;
         int userNum = 0;
@@ -62,7 +61,6 @@ public class Main {
             } else {
                 System.out.println("Bingo!");
                 long t2 = System.currentTimeMillis();
-                System.out.println("Time is " + t2);
                 long time = t2 - t1;
                 result.time = time;
                 result.attempts = i;
